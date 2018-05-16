@@ -1,0 +1,26 @@
+.product {
+  padding: 10px;
+  margin: 25px;
+  background-color: #8fbc8f24;
+  border-radius: 10px;
+}
+
+.product .product-info {
+  width: inherit !important;
+  text-align: center;
+}
+
+.product-info img {
+  /*height: 200px;*/
+  /*width: 250px;*/
+  margin: auto;
+}
+
+.card-body {
+  background-color: #69696921;
+}
+
+.product-action-buttons {
+  margin-top: 20px;
+}
+

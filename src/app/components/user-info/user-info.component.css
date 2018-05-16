@@ -1,0 +1,14 @@
+.user-info-container {
+  width: 50%;
+  float: left;
+  text-align: center;
+}
+
+.user-icon {
+  height: 50px;
+}
+
+.user-content {
+  width: 50%;
+  float: right;
+}

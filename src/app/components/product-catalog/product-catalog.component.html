@@ -1,0 +1,11 @@
+<div class="container-fluid">
+  <div *ngFor="let row of rowsArray" class="row">
+    <div *ngFor="let product of productList" class="product-catalog-col col-md-4">
+      <app-product
+        [name]="product.name"
+        [description]="product.description"
+        [priceInfo]="getProductPriceById(product.priceId, product.id)">
+      </app-product>
+    </div>
+  </div>
+</div>

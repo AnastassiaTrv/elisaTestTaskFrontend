@@ -1,0 +1,15 @@
+.container-fluid {
+  width: 90%;
+  margin: auto;
+  background-color: beige;
+  padding: 50px 10px 50px 10px;
+  border-radius: 25px;
+}
+
+.product-list {
+  list-style: none;
+}
+
+.product-catalog-col {
+  min-width: 360px;
+}

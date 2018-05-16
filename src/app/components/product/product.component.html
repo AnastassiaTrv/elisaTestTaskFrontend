@@ -1,0 +1,24 @@
+<div class="product">
+  <div class="product-info card" style="width: 18rem;">
+    <img class="card-img-top" src="../../../assets/mobile-512.png" alt="Phone image">
+
+    <!-- product component body -->
+    <div class="card-body">
+      <h5 class="card-title">{{name}}</h5>
+      <p class="card-text">{{description}}</p>
+
+      <!-- product price component -->
+      <app-product-price [priceInfo]="priceInfo"></app-product-price>
+
+      <div class="product-action-buttons">
+
+        <!-- product dialog component -->
+        <app-product-dialog [productName]="name" [priceInfo]="priceInfo" class="select-button"></app-product-dialog>
+        <button class="btn btn-secondary select-button">Buy it Now</button>
+
+      </div>
+    </div>
+    <!-- end of product component body -->
+
+  </div>
+</div>
