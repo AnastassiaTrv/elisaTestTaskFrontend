@@ -12,3 +12,13 @@
     <span class="badge badge-primary badge-pill">{{priceInfo.recurringCount}}</span>
   </li>
 </ul>
+
+<!-- price calculator component-->
+<div *ngIf="showPriceCalculator">
+  <app-total-price-calculator
+    [oneTimePrice]="priceInfo.oneTimePrice"
+    [recurrentCount]="priceInfo.recurringCount"
+    [recurrentPrice]="priceInfo.recurringPrice"
+    [currency]="currency">
+  </app-total-price-calculator>
+</div>

@@ -6,11 +6,18 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>One fine body&hellip;</p>
+    <!-- product price component -->
+    <app-product-price [priceInfo]="priceInfo" [showPriceCalculator]="true"></app-product-price>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+
+    <!-- modal footer buttons -->
+    <div class="footer-button-container">
+      <button type="button" class="btn btn-primary" (click)="c('Close click')">Add to cart</button>
+      <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+    </div>
+
   </div>
 </ng-template>
 
-<button class="btn btn-primary" (click)="openDialog(content)">Add to cart</button>
+<button class="btn btn-primary" (click)="openDialog(content)">Select</button>

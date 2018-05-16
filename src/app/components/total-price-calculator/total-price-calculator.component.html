@@ -1,0 +1,15 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <label>Amount:</label>
+    <select class="form-control amount-select" title="amount" [(ngModel)]="selectedAmount"
+            (ngModelChange) = "calculateTotalPrice()">
+      <!-- it is possible to add options using iteration as well -->
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+    </select>
+  </li>
+  <li class="list-group-item">Total price, {{currency}} :
+    <span class="badge badge-secondary total-price">{{totalPrice}}</span>
+  </li>
+</ul>

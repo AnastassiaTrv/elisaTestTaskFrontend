@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 // custom components
 import { ProductCatalogComponent } from './components/product-catalog/product-catalog.component';
@@ -15,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { ProductPriceComponent } from './components/product-price/product-price.component';
 import { ProductDialogComponent } from './components/product-dialog/product-dialog.component';
+import { TotalPriceCalculatorComponent } from './components/total-price-calculator/total-price-calculator.component';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { ProductDialogComponent } from './components/product-dialog/product-dial
     HeaderComponent,
     UserInfoComponent,
     ProductPriceComponent,
-    ProductDialogComponent
+    ProductDialogComponent,
+    TotalPriceCalculatorComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { ProductDialogComponent } from './components/product-dialog/product-dial
     }),
     StoreDevtoolsModule.instrument(),
     NgbModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

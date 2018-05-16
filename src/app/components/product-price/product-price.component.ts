@@ -11,10 +11,10 @@ export class ProductPriceComponent implements OnInit {
 
   // price object provided from parent element
   @Input() priceInfo;
+  @Input() showPriceCalculator;
 
   // in case there are different currencies in the system
   currency: string;
-
 
   ngOnInit() {
     this.currency = '$';

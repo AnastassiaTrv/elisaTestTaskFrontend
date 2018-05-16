@@ -1,0 +1,9 @@
+.amount-select {
+  width: 80px;
+  float: right;
+}
+
+.total-price {
+  font-size: 15px;
+  margin: 0 15px;
+}
