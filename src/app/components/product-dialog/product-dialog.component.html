@@ -7,13 +7,17 @@
   </div>
   <div class="modal-body">
     <!-- product price component -->
-    <app-product-price [priceInfo]="priceInfo" [showPriceCalculator]="true"></app-product-price>
+    <app-product-price
+      [priceInfo]="priceInfo"
+      [showPriceCalculator]="true"
+      (onTotalPriceCalculated)="onTotalPriceChanged($event)">
+    </app-product-price>
   </div>
   <div class="modal-footer">
 
     <!-- modal footer buttons -->
     <div class="footer-button-container">
-      <button type="button" class="btn btn-primary" (click)="c('Close click')">Add to cart</button>
+      <button type="button" class="btn btn-primary" (click)="addProductToShoppingCart()">Add to cart</button>
       <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
     </div>
 

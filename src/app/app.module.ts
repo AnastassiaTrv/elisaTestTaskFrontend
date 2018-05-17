@@ -18,6 +18,8 @@ import { ProductPriceComponent } from './components/product-price/product-price.
 import { ProductDialogComponent } from './components/product-dialog/product-dialog.component';
 import { TotalPriceCalculatorComponent } from './components/total-price-calculator/total-price-calculator.component';
 
+// reducers
+import {shoppingCartReducer} from './store/shoppingCartData/shopping-cart.reducer';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,7 @@ import { TotalPriceCalculatorComponent } from './components/total-price-calculat
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({
-      // reducers here
+      shoppingCartData: shoppingCartReducer
     }),
     StoreDevtoolsModule.instrument(),
     NgbModule.forRoot(),
