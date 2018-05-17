@@ -11,14 +11,16 @@
       <app-product-price [priceInfo]="priceInfo"></app-product-price>
 
       <div class="product-action-buttons">
-
         <!-- product dialog component -->
-        <app-product-dialog [productName]="name" [priceInfo]="priceInfo" class="select-button"></app-product-dialog>
+        <app-product-dialog
+          [productName]="name"
+          [productId]="productId"
+          [priceInfo]="priceInfo"
+          class="select-button">
+        </app-product-dialog>
         <button class="btn btn-secondary select-button">Buy it Now</button>
-
       </div>
     </div>
     <!-- end of product component body -->
-
   </div>
 </div>

@@ -4,13 +4,13 @@
 export default class ShoppingCartItem {
 
   name: string;
-  description: string;
+  productId: string;
   amount: number;
   totalPrice: number;
 
   constructor() {
     this.name = null;
-    this.description = null;
+    this.productId = null;
     this.amount = null;
     this.totalPrice = null;
   }

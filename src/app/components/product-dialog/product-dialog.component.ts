@@ -15,6 +15,7 @@ import {AddShoppingCartItem, SetShoppingCartData} from '../../store/shoppingCart
 export class ProductDialogComponent implements OnInit {
 
   @Input() productName: string;
+  @Input() productId: string;
   @Input() priceInfo: object;
 
   closeResult: string;
@@ -25,6 +26,8 @@ export class ProductDialogComponent implements OnInit {
   ngOnInit() {
     const item = new ShoppingCartItem();
     item.name = this.productName;
+    item.productId = this.productId;
+
     this.shoppingCartItem = item;
   }
 
@@ -51,7 +54,7 @@ export class ProductDialogComponent implements OnInit {
   }
 
   addProductToShoppingCart() {
-    console.log('adding item to shopping cart');
-    this.store.dispatch(new AddShoppingCartItem(this.shoppingCartItem));
+    const item = {...this.shoppingCartItem};
+    this.store.dispatch(new AddShoppingCartItem(item));
   }
 }
