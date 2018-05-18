@@ -1,3 +1,26 @@
-<div class="shopping-cart-container">
-  <button class="btn btn-primary" (click)="returnToProductCatalog()">Return to catalog</button>
+<div class="chopping-cart-content">
+
+  <table class="table table-striped product-table">
+    <thead>
+    <tr>
+      <th class="centered-table-cell">Product</th>
+      <th class="centered-table-cell">Quantity</th>
+      <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--<tr *ngIf="!(cartItems$) | async"></tr>-->
+    <tr *ngFor="let item of cartItems$ | async">
+      <td class="centered-table-cell">{{item.name}}</td>
+      <td class="centered-table-cell">{{item.amount}}</td>
+      <td>{{item.totalPrice}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="bottom-buttons-container">
+    <button class="btn btn-primary return-btn" (click)="returnToProductCatalog()">Return to catalog</button>
+    <button class="btn btn-danger" (click)="returnToProductCatalog()">Make Order</button>
+  </div>
+
 </div>

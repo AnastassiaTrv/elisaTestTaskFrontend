@@ -1,8 +1,20 @@
-.shopping-cart-container {
+.product-table {
   width: 50%;
-  float: right;
+  margin: 25px auto;
+  background-color: white;
+  border: 2px solid #478cef;
 }
 
-.shopping-cart-icon {
-  height: 50px;
+.product-table tr th.centered-table-cell,
+.product-table tr td.centered-table-cell {
+  text-align: center;
+}
+
+.bottom-buttons-container {
+  width: 300px;
+  margin: auto;
+}
+
+.return-bt {
+  float: left;
 }
