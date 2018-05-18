@@ -57,8 +57,10 @@ function addItemInToState(state, item) {
     product.totalPrice += item.totalPrice;
 
   } else if (!environment.production) {
-    console.warn('Unable to add item into shopping cart, duplicates are found');
+    console.warn(`Unable to add item into shopping cart, duplicates are found, product id: ${item.productId}`);
   }
+
+  stateCopy.productsTotal += item.amount;
 
   return stateCopy;
 }

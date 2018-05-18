@@ -71,7 +71,8 @@ export class ProductCatalogComponent implements OnInit {
     let result = {};
 
     if (filtered.length !== 1 && !environment.production) {
-      console.warn('unable to get price for product with id: ' + productId);
+
+      console.warn(`unable to get price for product with id:  ${productId}`);
 
     } else {
       result = filtered[0];

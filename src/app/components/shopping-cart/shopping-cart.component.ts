@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,13 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor() {
-    this.numberOfProducts = 5;
-  }
-
-  numberOfProducts: number;
+  constructor(private router: Router) {}
 
   ngOnInit() {
+  }
+
+
+  /**
+   * Navigate to product catalog
+   */
+  returnToProductCatalog() {
+    this.router.navigate(['/catalog']);
   }
 
 }

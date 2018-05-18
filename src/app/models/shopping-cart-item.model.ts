@@ -8,10 +8,5 @@ export default class ShoppingCartItem {
   amount: number;
   totalPrice: number;
 
-  constructor() {
-    this.name = null;
-    this.productId = null;
-    this.amount = null;
-    this.totalPrice = null;
-  }
+  constructor() {}
 }

@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+#toast-container>.toast-success {
+  color: white !important;
+  background-color: rgba(85, 170, 21, 0.55) !important;
+  border-radius: 15px;
+  width: 500px;
+  height: 65px;
+  padding: 18px;
+}
