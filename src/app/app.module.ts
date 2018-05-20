@@ -3,11 +3,10 @@ import { NgModule } from '@angular/core';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
@@ -25,6 +24,10 @@ import { TotalPriceCalculatorComponent } from './components/total-price-calculat
 import {shoppingCartReducer} from './store/shoppingCartData/shopping-cart.reducer';
 import { CartInfoComponent } from './components/header/cart-info/cart-info.component';
 
+// custom services
+import {ProductsService} from './services/product/products.service';
+import {PriceService} from './services/price/price.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +43,7 @@ import { CartInfoComponent } from './components/header/cart-info/cart-info.compo
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({
       shoppingCartData: shoppingCartReducer
@@ -50,7 +54,7 @@ import { CartInfoComponent } from './components/header/cart-info/cart-info.compo
     BrowserAnimationsModule,
     ToastModule.forRoot()
   ],
-  providers: [],
+  providers: [ProductsService, PriceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

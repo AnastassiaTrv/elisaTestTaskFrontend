@@ -65,7 +65,7 @@ function addShoppingCartItemIntoState(state, item: ShoppingCartItem) {
     throw new Error(`Unable to add item into shopping cart, duplicates are found, product id: ${item.productId}`);
   }
 
-  // increase total amount of products and total price
+  // increase total amount of product and total price
   stateCopy.productsTotal += item.amount;
   stateCopy.priceTotal += item.totalPrice;
 
@@ -73,7 +73,7 @@ function addShoppingCartItemIntoState(state, item: ShoppingCartItem) {
 }
 
 /**
- * Remove item from shopping carts product list. Decrease products total amount and price in the shopping cart.
+ * Remove item from shopping carts product list. Decrease product total amount and price in the shopping cart.
  * @param state - current state of shopping cart
  * @param {ShoppingCartItem} item
  * @returns {{}}
@@ -89,7 +89,7 @@ function removeShoppingCartItemFromState(state, item: ShoppingCartItem) {
   if (filtered.length === 1) {
     const product = stateCopy.productList[filtered[0].index];
 
-    // decrease total amount of products and total price
+    // decrease total amount of product and total price
     stateCopy.productsTotal -= product.amount;
     stateCopy.priceTotal -= item.totalPrice;
 

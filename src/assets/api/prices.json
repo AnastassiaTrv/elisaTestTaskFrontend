@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "recurringPrice": 12.99,
+    "oneTimePrice": 50,
+    "recurringCount": 24
+  },
+  {
+    "id": 5,
+    "recurringPrice": 22.351223,
+    "oneTimePrice": 50.1233125,
+    "recurringCount": 12
+  }
+]

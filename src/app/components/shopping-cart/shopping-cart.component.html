@@ -6,7 +6,7 @@
       <th class="centered-table-cell">Product</th>
       <th class="centered-table-cell">Quantity</th>
       <th>Price</th>
-      <th>Action</th>
+      <th class="centered-table-cell">Action</th>
     </tr>
     </thead>
     <tbody *ngIf="isCartEmpty;then emptyContent else products">
@@ -37,7 +37,7 @@
     <td class="centered-table-cell">{{item.name}}</td>
     <td class="centered-table-cell">{{item.amount}}</td>
     <td>{{item.totalPrice}}</td>
-    <td>
+    <td class="centered-table-cell">
       <button class="btn btn-secondary" (click)="removeItemFromCart(item.productId)">Remove</button>
     </td>
   </tr>
