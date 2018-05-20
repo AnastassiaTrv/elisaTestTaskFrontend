@@ -6,21 +6,40 @@
       <th class="centered-table-cell">Product</th>
       <th class="centered-table-cell">Quantity</th>
       <th>Price</th>
+      <th>Action</th>
     </tr>
     </thead>
-    <tbody>
-    <!--<tr *ngIf="!(cartItems$) | async"></tr>-->
-    <tr *ngFor="let item of cartItems$ | async">
-      <td class="centered-table-cell">{{item.name}}</td>
-      <td class="centered-table-cell">{{item.amount}}</td>
-      <td>{{item.totalPrice}}</td>
-    </tr>
+    <tbody *ngIf="isCartEmpty;then emptyContent else products">
+    <!-- fill with proper content-->
     </tbody>
   </table>
 
   <div class="bottom-buttons-container">
     <button class="btn btn-primary return-btn" (click)="returnToProductCatalog()">Return to catalog</button>
-    <button class="btn btn-danger" (click)="returnToProductCatalog()">Make Order</button>
+    <button *ngIf="!isCartEmpty" class="btn btn-danger" (click)="returnToProductCatalog()">Make Order</button>
   </div>
 
 </div>
+
+<!-- render empty row if no items in the cart -->
+<ng-template #emptyContent>
+  <tr>
+    <td class="centered-table-cell">No products</td>
+    <td class="centered-table-cell">-</td>
+    <td>-</td>
+    <td></td>
+  </tr>
+</ng-template>
+
+<!-- iterate list and render cart items -->
+<ng-template #products>
+  <tr *ngFor="let item of cartItemsList$ | async">
+    <td class="centered-table-cell">{{item.name}}</td>
+    <td class="centered-table-cell">{{item.amount}}</td>
+    <td>{{item.totalPrice}}</td>
+    <td>
+      <button class="btn btn-secondary" (click)="removeItemFromCart(item.productId)">Remove</button>
+    </td>
+  </tr>
+</ng-template>
+

@@ -1,6 +1,7 @@
 import { initialShoppingCartState } from '../app.state';
 import * as ShoppingCartActions from './shopping-cart.action';
 import {environment} from '../../../environments/environment.prod';
+import ShoppingCartItem from '../../models/shopping-cart-item.model';
 
 export type Action = ShoppingCartActions.All;
 
@@ -26,7 +27,11 @@ export function shoppingCartReducer(state = initialShoppingCartState(), action: 
     }
 
     case ShoppingCartActions.ADD_SHOPPING_CART_ITEM: {
-      return addItemInToState(state, action.payload);
+      return addShoppingCartItemIntoState(state, action.payload);
+    }
+
+    case ShoppingCartActions.REMOVE_SHOPPING_CART_ITEM: {
+      return removeShoppingCartItemFromState(state, action.payload);
     }
 
     default: return state;
@@ -34,13 +39,13 @@ export function shoppingCartReducer(state = initialShoppingCartState(), action: 
 }
 
 /**
- * Add new item into product list of shopping cart (if current item is not there yet),
- * otherwise increase the amount and total price of item in the list
- * @param state - existing state of shopping cart
+ * Add new item into shopping carts product list (if current item is not there yet).
+ * In current item already exists in the list then just increase the amount and total price.
+ * @param state - current state of shopping cart
  * @param item - item to add
  * @returns {{}} - new state
  */
-function addItemInToState(state, item) {
+function addShoppingCartItemIntoState(state, item: ShoppingCartItem) {
   const stateCopy = {...state}; // make copy, state should be immutable
 
   const filtered = stateCopy.productList.filter((product, index) => {
@@ -57,10 +62,42 @@ function addItemInToState(state, item) {
     product.totalPrice += item.totalPrice;
 
   } else if (!environment.production) {
-    console.warn(`Unable to add item into shopping cart, duplicates are found, product id: ${item.productId}`);
+    throw new Error(`Unable to add item into shopping cart, duplicates are found, product id: ${item.productId}`);
   }
 
+  // increase total amount of products and total price
   stateCopy.productsTotal += item.amount;
+  stateCopy.priceTotal += item.totalPrice;
+
+  return stateCopy;
+}
+
+/**
+ * Remove item from shopping carts product list. Decrease products total amount and price in the shopping cart.
+ * @param state - current state of shopping cart
+ * @param {ShoppingCartItem} item
+ * @returns {{}}
+ */
+function removeShoppingCartItemFromState(state, item: ShoppingCartItem) {
+  const stateCopy = {...state}; // make copy, state should be immutable
+
+  const filtered = stateCopy.productList.filter((product, index) => {
+    product.index = index;
+    return product.productId === item.productId;
+  });
+
+  if (filtered.length === 1) {
+    const product = stateCopy.productList[filtered[0].index];
+
+    // decrease total amount of products and total price
+    stateCopy.productsTotal -= product.amount;
+    stateCopy.priceTotal -= item.totalPrice;
+
+    stateCopy.productList.splice(product.index, 1); // remove product from list
+
+  } else if (!environment.production) {
+    throw new Error(`Unable to delete item from shopping cart, product id: ${item.productId}`);
+  }
 
   return stateCopy;
 }

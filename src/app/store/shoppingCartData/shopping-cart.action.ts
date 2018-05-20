@@ -10,6 +10,7 @@ import ShoppingCartItem from '../../models/shopping-cart-item.model';
 export const GET_SHOPPING_CART_DATA = 'GET_SHOPPING_CART_DATA';
 export const SET_SHOPPING_CART_DATA = 'SET_SHOPPING_CART_DATA';
 export const ADD_SHOPPING_CART_ITEM = 'ADD_SHOPPING_CART_ITEM';
+export const REMOVE_SHOPPING_CART_ITEM = 'REMOVE_SHOPPING_CART_ITEM';
 
 export class GetShoppingCartData implements Action {
   readonly type = GET_SHOPPING_CART_DATA;
@@ -38,4 +39,16 @@ export class AddShoppingCartItem implements Action {
 }
 
 
-export type All = GetShoppingCartData | SetShoppingCartData | AddShoppingCartItem;
+export class RemoveShoppingCartItem implements Action {
+  readonly type = REMOVE_SHOPPING_CART_ITEM;
+  payload: ShoppingCartItem;
+
+  constructor(payload: ShoppingCartItem) {
+    this.payload = payload;
+  }
+}
+
+
+
+
+export type All = GetShoppingCartData | SetShoppingCartData | AddShoppingCartItem | RemoveShoppingCartItem;

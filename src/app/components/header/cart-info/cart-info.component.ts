@@ -19,7 +19,6 @@ export class CartInfoComponent implements OnInit {
     this.cartItemsCount$ = this.store.select( state => state.shoppingCartData.productsTotal);
   }
 
-
   /**
    * Navigate to shopping cart view
    */
