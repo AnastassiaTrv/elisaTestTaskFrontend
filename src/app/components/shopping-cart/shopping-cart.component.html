@@ -16,7 +16,7 @@
 
   <div class="bottom-buttons-container">
     <button class="btn btn-primary return-btn" (click)="returnToProductCatalog()">Return to catalog</button>
-    <button *ngIf="!isCartEmpty" class="btn btn-danger" (click)="returnToProductCatalog()">Make Order</button>
+    <button *ngIf="!isCartEmpty" class="btn btn-danger" (click)="continueWithOrder()">Continue</button>
   </div>
 
 </div>

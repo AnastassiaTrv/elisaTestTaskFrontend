@@ -1,21 +1,26 @@
 import ShoppingCartModel from '../models/shopping-cart.model';
-import ShoppingCartItem from '../models/shopping-cart-item.model';
+import {Customer} from '../models/customer.model';
 
 export interface State {
-  shoppingCartData: {
-    productsTotal: number,
-    priceTotal: number,
-    productList: ShoppingCartItem[]
-  };
+  shoppingCartData: ShoppingCartModel;
+  customerData: Customer;
 }
-
 
 /**
  * Get initial state for shopping cart
  * @returns {ShoppingCartModel}
  */
 export const initialShoppingCartState = function () {
-  return new ShoppingCartModel(0, 0, []);
+  return new ShoppingCartModel();
+};
+
+
+/**
+ * Get initial state for shopping cart
+ * @returns {ShoppingCartModel}
+ */
+export const initialCustomerState = function () {
+  return new Customer();
 };
 
 

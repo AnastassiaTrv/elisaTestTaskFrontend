@@ -32,6 +32,14 @@ export class ShoppingCartComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+
+  /**
+   * Navigate to user information fields
+   */
+  continueWithOrder() {
+    this.router.navigate(['/order']);
+  }
+
   /**
    * Remove shopping cart item by product it
    * @param {string} productId - id of product to be removed

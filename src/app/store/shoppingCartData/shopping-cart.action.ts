@@ -48,7 +48,4 @@ export class RemoveShoppingCartItem implements Action {
   }
 }
 
-
-
-
 export type All = GetShoppingCartData | SetShoppingCartData | AddShoppingCartItem | RemoveShoppingCartItem;

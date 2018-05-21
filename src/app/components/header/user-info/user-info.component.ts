@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Customer} from '../../../models/customer.model';
+import {Store} from '@ngrx/store';
+import {State} from '../../../store/app.state';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-user-info',
@@ -7,15 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserInfoComponent implements OnInit {
 
-  constructor() {
-    this.userName = 'John Smith';
-    this.userEmail = 'john.smith@gmail.com';
-  }
+  customer$: Observable<Customer>;
 
-  userName: string;
-  userEmail: string;
+  constructor(private store: Store<State>) {}
 
   ngOnInit() {
+    this.customer$ = this.store.select(state => state.customerData);
   }
 
 }

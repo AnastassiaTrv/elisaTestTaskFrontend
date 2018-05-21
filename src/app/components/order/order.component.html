@@ -1,0 +1,40 @@
+<div class="order-content">
+  <h2 class="user-info-header centered">Fill customer information</h2>
+  <form class="user-info-form centered">
+    <div class="form-group">
+      <label for="fullName">Full name</label>
+      <input type="text" class="form-control" id="fullName" placeholder="full name">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="companyName">Your company</label>
+      <input type="text" class="form-control" id="companyName" placeholder="company name">
+    </div>
+    <div class="form-group">
+      <label for="street-name">Street</label>
+      <input type="text" class="form-control" id="street-name" placeholder="street">
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" placeholder="city">
+    </div>
+    <div class="form-group">
+      <label for="country">Country</label>
+      <input type="text" class="form-control" id="country" placeholder="country">
+    </div>
+    <div class="form-group">
+      <label for="postalCode">Postal code</label>
+      <input type="text" class="form-control" id="postalCode" placeholder="code">
+    </div>
+
+    <!-- footer buttons-->
+    <div class="footer-buttons">
+      <button class="btn btn-primary" (click)="returnToShoppingCart()">Return to Cart</button>
+      <button class="btn btn-danger" (click)="makeOrder()">Make order</button>
+    </div>
+  </form>
+</div>

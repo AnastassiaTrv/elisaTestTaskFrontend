@@ -27,6 +27,8 @@ import { CartInfoComponent } from './components/header/cart-info/cart-info.compo
 // custom services
 import {ProductsService} from './services/product/products.service';
 import {PriceService} from './services/price/price.service';
+import { OrderComponent } from './components/order/order.component';
+import {OrderService} from './services/order/order.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import {PriceService} from './services/price/price.service';
     ProductPriceComponent,
     ProductDialogComponent,
     TotalPriceCalculatorComponent,
-    CartInfoComponent
+    CartInfoComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,7 @@ import {PriceService} from './services/price/price.service';
     BrowserAnimationsModule,
     ToastModule.forRoot()
   ],
-  providers: [ProductsService, PriceService],
+  providers: [ProductsService, PriceService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
