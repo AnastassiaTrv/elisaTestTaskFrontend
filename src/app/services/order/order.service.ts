@@ -1,39 +1,27 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Constants} from '../../app-constants';
-import {Store} from '@ngrx/store';
-import {State} from '../../store/app.state';
-import ShoppingCartItem from '../../models/shopping-cart-item.model';
 
 @Injectable()
 export class OrderService {
 
   private _orderUrl = Constants.ORDERS_URl;
-  cartItemsList: ShoppingCartItem[]; // ngrx variable
 
-  constructor(private _http: HttpClient, private store: Store<State>) {
-    this.subscribeToCartItemList();
-  }
-
+  constructor(private _http: HttpClient) {}
 
   /**
-   * Synchronize productList from global state with local variable
+   * Submit order with customer and shopping cart items
+   * @param customerInfo - order customer information
+   * @param productList - order products
+   * @returns {Observable<Object>}
    */
-  subscribeToCartItemList() {
-    this.store.select( state => state.shoppingCartData.productList).subscribe( items  => {
-      this.cartItemsList = items;
-    });
-  }
+  sendOrder(customerInfo, productList) {
+    const params = new HttpParams()
+      .set('customerInfo', customerInfo)
+      .set('productList', JSON.stringify(productList));
 
-
-  processShoppingCartItemList() {
-    
-  }
-
-  sentOrder() {
-    const params = new HttpParams().set('order', '').toString();
-
+    // console.log('customerInfo: ' +  customerInfo);
+    // console.log('productList: ' +  productList);
     return this._http.post(this._orderUrl, params);
-
   }
 }

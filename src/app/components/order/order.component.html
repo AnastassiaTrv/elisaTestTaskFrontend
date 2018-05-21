@@ -1,34 +1,36 @@
 <div class="order-content">
   <h2 class="user-info-header centered">Fill customer information</h2>
+
+  <!-- customer information form -->
   <form class="user-info-form centered">
     <div class="form-group">
       <label for="fullName">Full name</label>
-      <input type="text" class="form-control" id="fullName" placeholder="full name">
+      <input [(ngModel)]="customer.name" type="text" class="form-control" id="fullName" name="fullname">
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input [(ngModel)]="customer.email"  type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
       <label for="companyName">Your company</label>
-      <input type="text" class="form-control" id="companyName" placeholder="company name">
+      <input [(ngModel)]="customer.companyname" type="text" class="form-control" id="companyName" name="company">
     </div>
     <div class="form-group">
       <label for="street-name">Street</label>
-      <input type="text" class="form-control" id="street-name" placeholder="street">
+      <input [(ngModel)]="customer.street" type="text" class="form-control" id="street-name" name="street">
     </div>
     <div class="form-group">
       <label for="city">City</label>
-      <input type="text" class="form-control" id="city" placeholder="city">
+      <input [(ngModel)]="customer.city" type="text" class="form-control" id="city" name="city">
     </div>
     <div class="form-group">
       <label for="country">Country</label>
-      <input type="text" class="form-control" id="country" placeholder="country">
+      <input [(ngModel)]="customer.country" type="text" class="form-control" id="country" name="country">
     </div>
     <div class="form-group">
       <label for="postalCode">Postal code</label>
-      <input type="text" class="form-control" id="postalCode" placeholder="code">
+      <input [(ngModel)]="customer.postalCode" type="text" class="form-control" id="postalCode" name="code">
     </div>
 
     <!-- footer buttons-->
