@@ -3,9 +3,9 @@
  */
 export default class ShoppingCartItem {
 
-  name: string;
+  productName: string;
   productId: string;
-  amount: number;
+  quantity: number;
   totalPrice: number;
 
   constructor() {}

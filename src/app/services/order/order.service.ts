@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Constants} from '../../app-constants';
 
 @Injectable()
@@ -16,12 +16,36 @@ export class OrderService {
    * @returns {Observable<Object>}
    */
   sendOrder(customerInfo, productList) {
-    const params = new HttpParams()
-      .set('customerInfo', customerInfo)
-      .set('productList', JSON.stringify(productList));
+    const order = {
+      // orderId: 7,
+      customer: {
+        customerId: 1
+      },
+      orderLines: this.getOrderLines(productList)
+    };
 
-    // console.log('customerInfo: ' +  customerInfo);
-    // console.log('productList: ' +  productList);
-    return this._http.post(this._orderUrl, params);
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json');
+
+    this._http.post(this._orderUrl, order, {headers: headers}).subscribe( result => {
+      console.log(result);
+    });
+  }
+
+
+  /**
+   * Copy productList and delete unnecessary properties, that do not need to be transferred to api
+   * @param productList - list of shopping cart items to process
+   */
+  getOrderLines(productList) {
+    const orderLines = [...productList];
+
+    orderLines.forEach( product => {
+      product.totalPrice = undefined;
+      product.index = undefined;
+    });
+
+    return orderLines;
   }
 }

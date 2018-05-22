@@ -17,27 +17,27 @@ export class ProductPriceComponent implements OnInit {
 
   currency: string;       // in case there are different currencies in the system
   totalPrice: number;
-  selectedAmount: string; // used to render amount in drop down, default is 1
+  selectedQuantity: string; // used to render quantity in drop down, default is 1
 
   ngOnInit() {
     this.currency = '$';
-    this.selectedAmount = '1'; // default amount
+    this.selectedQuantity = '1'; // default quantity
     this.calculateTotalPrice(); // calculate total price when component initialized
   }
 
 
   /**
-   * Calculate total price of product depending on amount and price info.
+   * Calculate total price of product depending on quantity and price info.
    * Emit new price calculation event to parent component.
    */
   calculateTotalPrice() {
-    const amount = parseInt(this.selectedAmount, 10);
+    const quantity = parseInt(this.selectedQuantity, 10);
     const oneProductTotalPrice = this.priceInfo.oneTimePrice + this.priceInfo.recurringPrice * this.priceInfo.recurringCount;
-    this.totalPrice = amount * oneProductTotalPrice;
+    this.totalPrice = quantity * oneProductTotalPrice;
 
     // emit event when new total price is calculated
     this.onTotalPriceCalculated.emit({
-      amount: amount,
+      quantity: quantity,
       totalPrice: this.totalPrice
     });
   }

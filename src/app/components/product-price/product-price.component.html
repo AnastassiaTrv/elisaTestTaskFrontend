@@ -27,8 +27,8 @@
 <div *ngIf="showPriceCalculator">
   <ul class="list-group">
     <li class="list-group-item">
-      <label>Amount:</label>
-      <select class="form-control amount-select" title="amount" [(ngModel)]="selectedAmount"
+      <label>Quantity:</label>
+      <select class="form-control quantity-select" title="quantity" [(ngModel)]="selectedQuantity"
               (ngModelChange) = "calculateTotalPrice()">
         <!-- it is possible to add options using iteration as well -->
         <option>1</option>

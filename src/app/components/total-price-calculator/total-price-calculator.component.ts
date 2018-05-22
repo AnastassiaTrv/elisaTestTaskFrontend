@@ -9,8 +9,8 @@ export class TotalPriceCalculatorComponent implements OnInit {
 
   constructor() { }
 
-  // used to render amount in drop down
-  selectedAmount: number;
+  // used to render quantity in drop down
+  selectedQuantity: number;
   totalPrice: number;
 
   @Input() oneTimePrice: number;
@@ -21,23 +21,23 @@ export class TotalPriceCalculatorComponent implements OnInit {
   @Output() onTotalPriceCalculated = new EventEmitter();
 
   ngOnInit() {
-    // default amount
-    this.selectedAmount = 1;
+    // default quantity
+    this.selectedQuantity = 1;
 
-    // calculate total price based on default selected amount
+    // calculate total price based on default selected quantity
     this.calculateTotalPrice();
   }
 
   /**
-   * Calculate total price of product depending on amount and price info
+   * Calculate total price of product depending on quantity and price info
    */
   calculateTotalPrice() {
     const oneProductTotalPrice = this.oneTimePrice + this.recurrentCount * this.recurrentPrice;
-    this.totalPrice = this.selectedAmount * oneProductTotalPrice;
+    this.totalPrice = this.selectedQuantity * oneProductTotalPrice;
 
     // emit event when new total price is calculated
     this.onTotalPriceCalculated.emit({
-      amount: this.selectedAmount,
+      quantity: this.selectedQuantity,
       totalPrice: this.totalPrice
     });
   }

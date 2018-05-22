@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="priceList" class="row">
   <div *ngFor="let product of productList | async" class="product-catalog-col col-md-4">
     <app-product
       [name]="product.name"

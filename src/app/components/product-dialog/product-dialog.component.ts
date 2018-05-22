@@ -37,7 +37,7 @@ export class ProductDialogComponent implements OnInit {
    */
   createDefaultShoppingCartItem() {
     const item = new ShoppingCartItem();
-    item.name = this.productName;
+    item.productName = this.productName;
     item.productId = this.productId;
 
     this.shoppingCartItem = item;
@@ -75,7 +75,7 @@ export class ProductDialogComponent implements OnInit {
    * @param data
    */
   onTotalPriceChanged(data) {
-    this.shoppingCartItem.amount = data.amount;
+    this.shoppingCartItem.quantity = data.quantity;
     this.shoppingCartItem.totalPrice = data.totalPrice;
   }
 

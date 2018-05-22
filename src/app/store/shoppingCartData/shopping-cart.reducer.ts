@@ -40,7 +40,7 @@ export function shoppingCartReducer(state = initialShoppingCartState(), action: 
 
 /**
  * Add new item into shopping carts product list (if current item is not there yet).
- * In current item already exists in the list then just increase the amount and total price.
+ * In current item already exists in the list then just increase the quantity and total price.
  * @param state - current state of shopping cart
  * @param item - item to add
  * @returns {{}} - new state
@@ -58,22 +58,22 @@ function addShoppingCartItemIntoState(state, item: ShoppingCartItem) {
 
   } else if (filtered.length === 1) {
     const product = stateCopy.productList[filtered[0].index];
-    product.amount += item.amount;
+    product.quantity += item.quantity;
     product.totalPrice += item.totalPrice;
 
   } else if (!environment.production) {
     throw new Error(`Unable to add item into shopping cart, duplicates are found, product id: ${item.productId}`);
   }
 
-  // increase total amount of product and total price
-  stateCopy.productsTotal += item.amount;
+  // increase total quantity of product and total price
+  stateCopy.productsTotal += item.quantity;
   stateCopy.priceTotal += item.totalPrice;
 
   return stateCopy;
 }
 
 /**
- * Remove item from shopping carts product list. Decrease product total amount and price in the shopping cart.
+ * Remove item from shopping carts product list. Decrease product total quantity and price in the shopping cart.
  * @param state - current state of shopping cart
  * @param {ShoppingCartItem} item
  * @returns {{}}
@@ -89,8 +89,8 @@ function removeShoppingCartItemFromState(state, item: ShoppingCartItem) {
   if (filtered.length === 1) {
     const product = stateCopy.productList[filtered[0].index];
 
-    // decrease total amount of product and total price
-    stateCopy.productsTotal -= product.amount;
+    // decrease total quantity of product and total price
+    stateCopy.productsTotal -= product.quantity;
     stateCopy.priceTotal -= item.totalPrice;
 
     stateCopy.productList.splice(product.index, 1); // remove product from list

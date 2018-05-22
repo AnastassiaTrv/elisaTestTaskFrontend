@@ -34,8 +34,8 @@
 <!-- iterate list and render cart items -->
 <ng-template #products>
   <tr *ngFor="let item of cartItemsList$ | async">
-    <td class="centered-table-cell">{{item.name}}</td>
-    <td class="centered-table-cell">{{item.amount}}</td>
+    <td class="centered-table-cell">{{item.productName}}</td>
+    <td class="centered-table-cell">{{item.quantity}}</td>
     <td>{{item.totalPrice}}</td>
     <td class="centered-table-cell">
       <button class="btn btn-secondary" (click)="removeItemFromCart(item.productId)">Remove</button>
