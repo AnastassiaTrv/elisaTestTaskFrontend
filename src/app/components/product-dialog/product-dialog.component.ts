@@ -22,7 +22,11 @@ export class ProductDialogComponent implements OnInit {
   modalReference: any; // reference to current modal object
   shoppingCartItem: ShoppingCartItem;
 
-  constructor(private modalService: NgbModal, private store: Store<State>, public toastr: ToastsManager, vcr: ViewContainerRef) {
+  constructor(private modalService: NgbModal,
+              private store: Store<State>,
+              private toastr: ToastsManager,
+              vcr: ViewContainerRef) {
+
     this.toastr.setRootViewContainerRef(vcr);
   }
 

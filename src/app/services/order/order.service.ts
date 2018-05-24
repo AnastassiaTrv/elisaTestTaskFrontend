@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Constants} from '../../app-constants';
+import {IOrderRequestResult} from '../../models/order-request-result.model';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class OrderService {
@@ -15,12 +17,10 @@ export class OrderService {
    * @param productList - order products
    * @returns {Observable<Object>}
    */
-  sendOrder(customerInfo, productList) {
+  sendOrder(customerInfo, productList): Observable<IOrderRequestResult> {
+
     const order = {
-      // orderId: 7,
-      customer: {
-        customerId: 1
-      },
+      customer: this.getCustomer(customerInfo),
       orderLines: this.getOrderLines(productList)
     };
 
@@ -28,24 +28,31 @@ export class OrderService {
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
 
-    this._http.post(this._orderUrl, order, {headers: headers}).subscribe( result => {
-      console.log(result);
-    });
+    return this._http.post<IOrderRequestResult>(this._orderUrl, order, {headers: headers});
   }
 
 
   /**
-   * Copy productList and delete unnecessary properties, that do not need to be transferred to api
+   * Delete unnecessary properties from product, that do not need to be transferred to api
    * @param productList - list of shopping cart items to process
    */
   getOrderLines(productList) {
-    const orderLines = [...productList];
-
-    orderLines.forEach( product => {
+    productList.forEach( product => {
       product.totalPrice = undefined;
       product.index = undefined;
     });
 
-    return orderLines;
+    return productList;
+  }
+
+
+  /**
+   * Delete unnecessary properties from customer, that do not need to be transferred to api
+   * @param customerInfo
+   */
+  getCustomer(customerInfo) {
+    customerInfo.email = undefined;
+    customerInfo.name = undefined;
+    return customerInfo;
   }
 }

@@ -19,7 +19,6 @@ export function shoppingCartReducer(state = initialShoppingCartState(), action: 
 
     case ShoppingCartActions.SET_SHOPPING_CART_DATA: {
       return {
-        ...state,
         priceTotal: action.payload.priceTotal,
         productsTotal: action.payload.productsTotal,
         productList: action.payload.productList

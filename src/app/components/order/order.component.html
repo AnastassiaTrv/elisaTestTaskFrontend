@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
       <label for="companyName">Your company</label>
-      <input [(ngModel)]="customer.companyname" type="text" class="form-control" id="companyName" name="company">
+      <input [(ngModel)]="customer.companyName" type="text" class="form-control" id="companyName" name="company">
     </div>
     <div class="form-group">
       <label for="street-name">Street</label>
@@ -36,7 +36,7 @@
     <!-- footer buttons-->
     <div class="footer-buttons">
       <button class="btn btn-primary" (click)="returnToShoppingCart()">Return to Cart</button>
-      <button class="btn btn-danger" (click)="makeOrder()">Make order</button>
+      <button class="btn btn-danger" (click)="makeOrder()" *ngIf="!isSending">Make order</button>
     </div>
   </form>
 </div>
