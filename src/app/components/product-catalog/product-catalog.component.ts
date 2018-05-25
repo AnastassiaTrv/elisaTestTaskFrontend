@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment.prod';
 import { ProductsService } from '../../services/product/products.service';
-import {IProduct} from '../../models/product.model';
-import {Observable} from 'rxjs/Observable';
-import {PriceService} from '../../services/price/price.service';
-import {IPrice} from '../../models/price.model';
+import { IProduct } from '../../models/product.model';
+import { Observable } from 'rxjs/Observable';
+import { PriceService } from '../../services/price/price.service';
+import { IPrice } from '../../models/price.model';
 
 @Component({
   selector: 'app-product-catalog',
