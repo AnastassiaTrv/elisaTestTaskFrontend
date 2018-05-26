@@ -13,30 +13,45 @@ describe('CartInfoComponent', () => {
   let component: CartInfoComponent;
   let fixture: ComponentFixture<CartInfoComponent>;
   let store: Store<State>;
+  let elemNative: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CartInfoComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],
-      imports: [RouterTestingModule, StoreModule.forRoot({
-        shoppingCartData: shoppingCartReducer
-      })]
+      imports: [
+        RouterTestingModule,
+        StoreModule.forRoot({
+          shoppingCartData: shoppingCartReducer
+        })
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CartInfoComponent);
+    elemNative = fixture.debugElement.nativeElement;
+
     store = fixture.debugElement.injector.get(Store);
+
+    // set data into store
+    const cart = new ShoppingCartModel();
+    cart.productsTotal = 3;
+
+    // update store with created shopping cart data
+    store.dispatch(new SetShoppingCartData(cart));
+
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    const cart = new ShoppingCartModel();
-    cart.productsTotal = 1;
-    store.dispatch(new SetShoppingCartData(cart));
-
     expect(component).toBeTruthy();
   });
+
+  it('should display correct total of items', () => {
+    expect(elemNative.querySelector('p').textContent).toContain('3');
+  });
+
 });

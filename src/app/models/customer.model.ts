@@ -15,7 +15,7 @@ export class Customer {
     // test data for customer
     this.name = 'John Smith';
     this.email = 'john.smith@gmail.com';
-    this.customerId = 123;
+    this.customerId = null;
     this.companyName = 'Some company';
     this.street = 'Customers Street';
     this.postalCode = '7894';

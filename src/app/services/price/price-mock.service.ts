@@ -4,10 +4,16 @@ import 'rxjs/add/observable/of';
 
 export const PRICES: IPrice[] = [{
     id: 1,
-    recurringPrice: 2,
-    oneTimePrice: 3,
-    recurringCount: 4
-}];
+    recurringPrice: 10,
+    oneTimePrice: 30,
+    recurringCount: 5
+  },
+  {
+    id: 2,
+    recurringPrice: 20,
+    oneTimePrice: 40,
+    recurringCount: 8
+  }];
 
 export class PriceMockService {
 

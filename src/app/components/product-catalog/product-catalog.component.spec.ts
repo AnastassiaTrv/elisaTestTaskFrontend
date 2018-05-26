@@ -4,8 +4,8 @@ import { ProductCatalogComponent } from './product-catalog.component';
 import {ProductsService} from '../../services/product/products.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {PriceService} from '../../services/price/price.service';
-import {ProductsMockService} from '../../services/product/products-mock.service';
-import {PriceMockService} from '../../services/price/price-mock.service';
+import {ProductsMockService, PRODUCTS} from '../../services/product/products-mock.service';
+import {PriceMockService, PRICES} from '../../services/price/price-mock.service';
 
 describe('ProductCatalogComponent', () => {
   let component: ProductCatalogComponent;
@@ -32,5 +32,15 @@ describe('ProductCatalogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get price list on init', () => {
+    expect(component.priceList).toBe(PRICES);
+  });
+
+  it('should get price object by id', () => {
+    expect(component.getProductPriceById(2, null)).toBe(PRICES[1]);
+  });
+
+
 
 });

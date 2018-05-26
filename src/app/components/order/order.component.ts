@@ -27,11 +27,11 @@ export class OrderComponent implements OnInit {
               private toast: ToastsManager,
               vcr: ViewContainerRef) {
 
-    this.subscribeToCartItemList();
     this.toast.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
+    this.subscribeToCartItemList();
     this.customer = new Customer();
     this.isSending = false;
   }

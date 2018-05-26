@@ -1,6 +1,17 @@
+/*override some styles from libraries*/
+
 #toast-container>.toast-success {
   color: white !important;
   background-color: rgba(85, 170, 21, 0.55) !important;
+  border-radius: 15px;
+  width: 500px;
+  height: 65px;
+  padding: 18px;
+}
+
+#toast-container>.toast-error {
+  color: white !important;
+  background-color: rgba(170, 68, 21, 0.55) !important;
   border-radius: 15px;
   width: 500px;
   height: 65px;
