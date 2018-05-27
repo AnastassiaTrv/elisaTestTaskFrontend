@@ -21,6 +21,13 @@ export class OrderComponent implements OnInit {
   cartItemsList: ShoppingCartItem[]; // ngrx variable
   isSending: boolean; // if request is in progress
 
+  // validation error variables
+  companyNameError: string;
+  streetError: string;
+  postalCodeError: string;
+  cityError: string;
+  countryError: string;
+
   constructor(private router: Router,
               private orderService: OrderService,
               private store: Store<State>,
@@ -50,25 +57,9 @@ export class OrderComponent implements OnInit {
    */
   makeOrder() {
     this.isSending = true;
+    const self = this;
     this.orderService.sendOrder({...this.customer}, [...this.cartItemsList])
-      .subscribe(result => {
-        if (result.success) {
-          this.toast.success('Order successfully submitted');
-          const self = this;
-
-          // empty shopping cart data
-          this.store.dispatch(new SetShoppingCartData(new ShoppingCartModel()));
-
-          // navigate to main page after short pause
-          setTimeout(function () {
-            self.router.navigate(['/']);
-          }, 2000);
-
-        } else {
-          this.isSending = false;
-          this.toast.error('Your order is invalid');
-        }
-      }, error => {
+      .subscribe(result => this.onSuccessCallback (result, self), error => {
         this.isSending = false;
         this.toast.error('Order has not been submitted, an error occurred');
       });
@@ -76,16 +67,32 @@ export class OrderComponent implements OnInit {
 
 
   /**
+   * Clear form errors
+   */
+  cleanUpFormErrors() {
+    this.companyNameError = null;
+    this.streetError = null;
+    this.countryError = null;
+    this.cityError = null;
+    this.postalCodeError = null;
+  }
+
+
+  /**
    * Callback function for processing response
    * @param {IOrderRequestResult} result
+   * @context context object
    */
-  onSuccessCallback(result: IOrderRequestResult) {
+  onSuccessCallback(result: IOrderRequestResult, context) {
     if (result.success) {
-      this.toast.success('Order successfully submitted');
+      context.toast.success('Order successfully submitted');
       const self = this;
 
       // empty shopping cart data
-      this.store.dispatch(new SetShoppingCartData(new ShoppingCartModel()));
+      context.store.dispatch(new SetShoppingCartData(new ShoppingCartModel()));
+
+      // clean uo form errors if present
+      context.cleanUpFormErrors();
 
       // navigate to main page after short pause
       setTimeout(function () {
@@ -93,19 +100,17 @@ export class OrderComponent implements OnInit {
       }, 2000);
 
     } else {
-      this.isSending = false;
-      this.toast.error('Your order is invalid');
+      context.isSending = false;
+      context.toast.error('Your order is invalid');
+
+      if (result.errors) {
+        context.companyNameError = result.errors.companyName;
+        context.streetError = result.errors.street;
+        context.countryError = result.errors.country;
+        context.cityError = result.errors.city;
+        context.postalCodeError = result.errors.postalCode;
+      }
     }
-
-  }
-
-
-  /**
-   * Callback function for processing error
-   */
-  orErrorCallback(context) {
-    context.isSending = false;
-    context.toast.error('Order has not been submitted, an error occurred');
   }
 
 

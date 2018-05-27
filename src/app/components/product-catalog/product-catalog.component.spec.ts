@@ -41,6 +41,4 @@ describe('ProductCatalogComponent', () => {
     expect(component.getProductPriceById(2, null)).toBe(PRICES[1]);
   });
 
-
-
 });

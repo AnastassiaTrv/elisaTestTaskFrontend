@@ -6,3 +6,7 @@
 .user-info-form {
   margin-top: 25px;
 }
+
+.form-error {
+  color: red;
+}

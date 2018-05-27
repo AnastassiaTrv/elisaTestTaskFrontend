@@ -7,7 +7,8 @@ export class OrderMockService {
     customerId: 1,
     orderId: 1,
     addedCount: 2,
-    success: true
+    success: true,
+    errors: null
   };
 
   sendOrder(): Observable<IOrderRequestResult> {

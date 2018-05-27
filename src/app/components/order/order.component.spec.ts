@@ -12,6 +12,7 @@ import {State} from '../../store/app.state';
 import ShoppingCartModel from '../../models/shopping-cart.model';
 import {SetShoppingCartData} from '../../store/shoppingCartData/shopping-cart.action';
 import ShoppingCartItem from '../../models/shopping-cart-item.model';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('OrderComponent', () => {
   let component: OrderComponent;
@@ -29,7 +30,8 @@ describe('OrderComponent', () => {
         StoreModule.forRoot({
         shoppingCartData: shoppingCartReducer
       }),
-        ToastModule.forRoot()
+        ToastModule.forRoot(),
+        BrowserAnimationsModule
       ],
       providers: [
         {provide: OrderService, useClass: OrderMockService}
