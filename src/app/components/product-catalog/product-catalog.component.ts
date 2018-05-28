@@ -5,6 +5,7 @@ import { IProduct } from '../../models/product.model';
 import { Observable } from 'rxjs/Observable';
 import { PriceService } from '../../services/price/price.service';
 import { IPrice } from '../../models/price.model';
+import * as bigdecimal from 'bigdecimal/lib/bigdecimal';
 
 @Component({
   selector: 'app-product-catalog',
@@ -40,9 +41,27 @@ export class ProductCatalogComponent implements OnInit {
       console.warn(`unable to get price for product with id:  ${productId}`);
 
     } else {
-      result = filtered[0];
+      result = this.roundPriceToDecimal(filtered[0]);
     }
 
     return result;
+  }
+
+
+  /**
+   * Round price at 2 decimal places
+   * @param price
+   * @returns {any}
+   */
+  roundPriceToDecimal(price) {
+    const processedPrice = {...price};
+
+    const oneTimePriceRound = processedPrice.oneTimePrice.toFixed(2);
+    const recurringPriceRound = processedPrice.recurringPrice.toFixed(2);
+
+    processedPrice.oneTimePrice = new bigdecimal.BigDecimal(oneTimePriceRound);
+    processedPrice.recurringPrice = new bigdecimal.BigDecimal(recurringPriceRound);
+
+    return processedPrice;
   }
 }

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import * as bigdecimal from 'bigdecimal/lib/bigdecimal';
 
 @Component({
   selector: 'app-product-price',
@@ -32,8 +33,12 @@ export class ProductPriceComponent implements OnInit {
    */
   calculateTotalPrice() {
     const quantity = parseInt(this.selectedQuantity, 10);
-    const oneProductTotalPrice = this.priceInfo.oneTimePrice + this.priceInfo.recurringPrice * this.priceInfo.recurringCount;
-    this.totalPrice = quantity * oneProductTotalPrice;
+
+    const recurringCountBd = new bigdecimal.BigDecimal(this.priceInfo.recurringCount);
+    const recurringTotalPriceBd = this.priceInfo.recurringPrice.multiply(recurringCountBd);
+    const oneProductTotalPriceBd = this.priceInfo.oneTimePrice.add(recurringTotalPriceBd);
+
+    this.totalPrice = quantity * oneProductTotalPriceBd;
 
     // emit event when new total price is calculated
     this.onTotalPriceCalculated.emit({

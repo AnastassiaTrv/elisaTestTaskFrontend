@@ -6,7 +6,6 @@ import ShoppingCartItem from './shopping-cart-item.model';
 export default class ShoppingCartModel {
 
   productsTotal = 0;
-  priceTotal = 0;
   productList: ShoppingCartItem[] = [];
 
   constructor() {}

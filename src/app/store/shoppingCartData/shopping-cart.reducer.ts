@@ -19,7 +19,6 @@ export function shoppingCartReducer(state = initialShoppingCartState(), action: 
 
     case ShoppingCartActions.SET_SHOPPING_CART_DATA: {
       return {
-        priceTotal: action.payload.priceTotal,
         productsTotal: action.payload.productsTotal,
         productList: action.payload.productList
       };
@@ -35,68 +34,76 @@ export function shoppingCartReducer(state = initialShoppingCartState(), action: 
 
     default: return state;
   }
-}
 
-/**
- * Add new item into shopping carts product list (if current item is not there yet).
- * In current item already exists in the list then just increase the quantity and total price.
- * @param state - current state of shopping cart
- * @param item - item to add
- * @returns {{}} - new state
- */
-function addShoppingCartItemIntoState(state, item: ShoppingCartItem) {
-  const stateCopy = {...state}; // make copy, state should be immutable
 
-  const filtered = stateCopy.productList.filter((product, index) => {
-    product.index = index;
-    return product.productId === item.productId;
-  });
+  /**
+   * Add new item into shopping carts product list (if current item is not there yet).
+   * In current item already exists in the list then just increase the quantity and total price.
+   * @param cartState - current state of shopping cart
+   * @param item - item to add
+   * @returns {{}} - new state
+   */
+  function addShoppingCartItemIntoState(cartState, item: ShoppingCartItem) {
+    const stateCopy = {...cartState}; // make copy, state should be immutable
 
-  if (filtered.length === 0) {
-    stateCopy.productList.push(item);
+    const filtered = filterProductFromShoppingCart(cartState, item.productId);
+    if (filtered.length === 0) {
+      stateCopy.productList.push(item);
 
-  } else if (filtered.length === 1) {
-    const product = stateCopy.productList[filtered[0].index];
-    product.quantity += item.quantity;
-    product.totalPrice += item.totalPrice;
+    } else if (filtered.length === 1) {
+      const product = stateCopy.productList[filtered[0].index];
+      product.quantity += item.quantity;
+      product.totalPrice += item.totalPrice;
 
-  } else if (!environment.production) {
-    throw new Error(`Unable to add item into shopping cart, duplicates are found, product id: ${item.productId}`);
+      product.totalPrice = Math.round(product.totalPrice * 100) / 100;
+
+    } else if (!environment.production) {
+      throw new Error(`Unable to add item into shopping cart, duplicates are found, product id: ${item.productId}`);
+    }
+
+    // increase total quantity of product and total price
+    stateCopy.productsTotal += item.quantity;
+
+    return stateCopy;
   }
 
-  // increase total quantity of product and total price
-  stateCopy.productsTotal += item.quantity;
-  stateCopy.priceTotal += item.totalPrice;
+  /**
+   * Remove item from shopping carts product list. Decrease product total quantity and price in the shopping cart.
+   * @param cartState - current state of shopping cart
+   * @param {ShoppingCartItem} item
+   * @returns {{}}
+   */
+  function removeShoppingCartItemFromState(cartState, item: ShoppingCartItem) {
+    const stateCopy = {...cartState}; // make copy, state should be immutable
 
-  return stateCopy;
-}
+    const filtered = filterProductFromShoppingCart(cartState, item.productId);
 
-/**
- * Remove item from shopping carts product list. Decrease product total quantity and price in the shopping cart.
- * @param state - current state of shopping cart
- * @param {ShoppingCartItem} item
- * @returns {{}}
- */
-function removeShoppingCartItemFromState(state, item: ShoppingCartItem) {
-  const stateCopy = {...state}; // make copy, state should be immutable
+    if (filtered.length === 1) {
+      const product = stateCopy.productList[filtered[0].index];
 
-  const filtered = stateCopy.productList.filter((product, index) => {
-    product.index = index;
-    return product.productId === item.productId;
-  });
+      // decrease total quantity of product and total price
+      stateCopy.productsTotal -= product.quantity;
 
-  if (filtered.length === 1) {
-    const product = stateCopy.productList[filtered[0].index];
+      stateCopy.productList.splice(product.index, 1); // remove product from list
 
-    // decrease total quantity of product and total price
-    stateCopy.productsTotal -= product.quantity;
-    stateCopy.priceTotal -= item.totalPrice;
+    } else if (!environment.production) {
+      throw new Error(`Unable to delete item from shopping cart, product id: ${item.productId}`);
+    }
 
-    stateCopy.productList.splice(product.index, 1); // remove product from list
-
-  } else if (!environment.production) {
-    throw new Error(`Unable to delete item from shopping cart, product id: ${item.productId}`);
+    return stateCopy;
   }
 
-  return stateCopy;
+
+  /**
+   * Filter shopping cart item by its product id
+   * @param cartState - shopping cart state
+   * @param productId - product id
+   */
+  function filterProductFromShoppingCart(cartState, productId) {
+    return cartState.productList.filter((product, index) => {
+      product.index = index;
+      return product.productId === productId;
+    });
+  }
+
 }
