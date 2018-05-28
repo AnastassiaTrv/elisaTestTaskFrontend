@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductPriceComponent } from './product-price.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {IPrice} from '../../models/price.model';
-import {PRICES} from '../../services/price/price-mock.service';
+import {PRICES_PROCESSED} from '../../services/price/price-mock.service';
 
 describe('ProductPriceComponent', () => {
   let component: ProductPriceComponent;
@@ -25,7 +25,7 @@ describe('ProductPriceComponent', () => {
     elemNative = fixture.debugElement.nativeElement;
 
     // set expected price from constant for testing
-    expectedPrice = PRICES[0];
+    expectedPrice = PRICES_PROCESSED[0];
 
     // emulate @Input for component
     component.priceInfo = expectedPrice;

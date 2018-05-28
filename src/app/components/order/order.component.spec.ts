@@ -65,7 +65,6 @@ describe('OrderComponent', () => {
 
     cart.productList = productList;
     cart.productsTotal = 8;
-    cart.priceTotal = 300;
 
     // add created cart state into store
     store.dispatch(new SetShoppingCartData(cart));

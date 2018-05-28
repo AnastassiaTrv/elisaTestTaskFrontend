@@ -33,7 +33,7 @@ export class ProductCatalogComponent implements OnInit {
    * @param productId - id of product (for logging purpose)
    * @returns price object or empty object (if nothing found or found more than one)
    */
-  getProductPriceById(priceId, productId) {
+  getProductPriceById(priceId, productId): any {
     const filtered = this.priceList.filter( price => price.id === priceId);
     let result = {};
 

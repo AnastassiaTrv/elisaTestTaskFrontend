@@ -4,8 +4,9 @@ import { ProductCatalogComponent } from './product-catalog.component';
 import {ProductsService} from '../../services/product/products.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {PriceService} from '../../services/price/price.service';
-import {ProductsMockService, PRODUCTS} from '../../services/product/products-mock.service';
+import {ProductsMockService} from '../../services/product/products-mock.service';
 import {PriceMockService, PRICES} from '../../services/price/price-mock.service';
+import {IPrice} from '../../models/price.model';
 
 describe('ProductCatalogComponent', () => {
   let component: ProductCatalogComponent;
@@ -38,7 +39,10 @@ describe('ProductCatalogComponent', () => {
   });
 
   it('should get price object by id', () => {
-    expect(component.getProductPriceById(2, null)).toBe(PRICES[1]);
+    let priceObjFromComponent: IPrice;
+
+    priceObjFromComponent = component.getProductPriceById(2, null);
+    expect(priceObjFromComponent.recurringCount).toBe(8);
   });
 
 });
